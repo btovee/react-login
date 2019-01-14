@@ -42,7 +42,9 @@ class home extends Component {
     if(this.props.loggedIn){
         homePartial = <Welcome />;
     } else {
-        homePartial = <Login handleLogin={ this.props.handleLogin  }  loading={this.props.loading} />;
+        homePartial = <Login 
+                        handleLogin={this.props.handleLogin}
+                        loading={this.props.loading} />;
     }
 
     return (
@@ -52,7 +54,7 @@ class home extends Component {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         Web App
                     </Typography>
-                    { this.props.loggedIn ? <Button color="inherit">Log off</Button> : null }
+                    { this.props.loggedIn ? <Button color="inherit" onClick={this.props.handleLogout}>Log off</Button> : null }
                 </Toolbar>
             </AppBar>
             <Grid

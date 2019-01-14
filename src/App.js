@@ -55,12 +55,25 @@ class App extends Component {
     })
 }
 
+handleLogout = () => {
+  this.setState(
+    {
+      authToken : null,
+      loggedIn: false
+    }
+  );
+}
+
 
   render() {
     const { classes } = this.props;
     return (
       <div  className={classes.root}>
-        <Home handleLogin={this.handleLogin} loading={this.state.loading} loggedIn={this.state.loggedIn} />
+        <Home 
+          handleLogin={this.handleLogin} 
+          handleLogout={this.handleLogout}
+          loading={this.state.loading} 
+          loggedIn={this.state.loggedIn} />
       </div>
     );
   }
