@@ -7,9 +7,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import AppBarLayout from './appBarLayout/appBarLayout';
 
-import Login from '../login/login';
-import Welcome from './welcome/welcome';
+
 
 
 const styles = theme => ({
@@ -32,31 +32,14 @@ const styles = theme => ({
 
 });
 
-class home extends Component {
+class HomeLayout extends Component {
  
   render() {
     const { classes } = this.props;
 
-    let homePartial = null;
-
-    if(this.props.loggedIn){
-        homePartial = <Welcome />;
-    } else {
-        homePartial = <Login 
-                        handleLogin={this.props.handleLogin}
-                        loading={this.props.loading} />;
-    }
-
     return (
         <>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6" color="inherit" className={classes.grow}>
-                        Web App
-                    </Typography>
-                    { this.props.loggedIn ? <Button color="inherit" onClick={this.props.handleLogout}>Log off</Button> : null }
-                </Toolbar>
-            </AppBar>
+            <AppBarLayout />
             <Grid
                 container
                 direction="row"
@@ -64,16 +47,15 @@ class home extends Component {
                 alignItems="center"
                 className={classes.containerMargin}
                 >
-                { homePartial }
-
+                {this.props.children}
             </Grid>
         </>
     );
   }
 }
 
-home.propTypes = {
+HomeLayout.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(home);
+export default withStyles(styles)(HomeLayout);
