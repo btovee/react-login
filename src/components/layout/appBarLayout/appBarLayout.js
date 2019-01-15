@@ -27,12 +27,12 @@ class AppBarLayout extends Component {
             <AppBar position="static">
                 <Toolbar className={classes.content}>
                     <Grid container>
-                      <Grid xs={11}>
+                      <Grid item xs={11}>
                         <Typography variant="h6" color="inherit"  >
                             Web App
                         </Typography>
                       </Grid>
-                      <Grid xs={1}>
+                      <Grid item xs={1}>
                         { this.props.loggedIn ? <Button color="inherit"  onClick={this.handleLogout}>Log off</Button> : null }
                       </Grid>
                     </Grid>
@@ -61,4 +61,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles()(withRouter(AppBarLayout)));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(null)(withRouter(AppBarLayout)));

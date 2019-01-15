@@ -1,10 +1,10 @@
-import React , {Component} from 'react'; 
+import React, {Component} from 'react'; 
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as actionTypes from '../../store/actions';
 import LoginAPI from '../../services/login.api';
-import { getJwt, removeJwt } from '../../helpers/jwt-helper';
+import { getJwt } from '../../helpers/jwt-helper';
 
 
 class Authentication extends Component {

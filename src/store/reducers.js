@@ -2,7 +2,7 @@ import * as actionTypes from './actions';
 import { removeJwt } from '../helpers/jwt-helper';
 
 const initialState = {
-    username : null,
+    username : '',
     loggedIn : false
 }
 

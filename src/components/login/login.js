@@ -15,7 +15,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LoginAPI from '../../services/login.api';
-import { setJwt, removeJwt } from '../../helpers/jwt-helper';
+import { setJwt } from '../../helpers/jwt-helper';
 import * as actionTypes from '../../store/actions';
 
 const styles = theme => ({
@@ -28,17 +28,15 @@ const styles = theme => ({
   },
   textField: {
     flexBasis: 200,
-  },
-  buttonMargin: {
-      margin: "3%"
   }
-
 });
 
 class Login extends Component {
   state = {
     password: '',
     showPassword: false,
+    loginError: false,
+    loginErrorMessage: ''
   };
 
   handlePasswordChange = event => {
@@ -76,7 +74,16 @@ class Login extends Component {
         loading: false
       })
       if(err.response.status === 401) {
-        console.log(err.response.data);
+        this.setState({
+          loginError: true,
+          loginErrorMessage: err.response.data
+        });
+        setTimeout(() => {
+          this.setState({
+            loginError: false,
+            loginErrorMessage: ''
+          });
+        }, 2000)
       }
     })
   }
@@ -86,6 +93,11 @@ class Login extends Component {
 
 
     let loginPartial = null;
+    let loginErrorMessage = null;
+
+    if(this.state.loginError) {
+      loginErrorMessage = ( <Grid item xs={12} className={classes.margin}> {this.state.loginErrorMessage}  </Grid> )
+    }
 
     if(this.props.loading){
         loginPartial = <CircularProgress className={classes.progress} />
@@ -101,6 +113,7 @@ class Login extends Component {
                   label="Username"
                   value={this.props.username}
                   onChange={(e) => this.props.handleUsernameChange(e)}
+                  error={this.state.loginError}
                   />
                 <TextField
                   id="outlined-adornment-password"
@@ -110,6 +123,7 @@ class Login extends Component {
                   label="Password"
                   value={this.state.password}
                   onChange={(e) => this.handlePasswordChange(e)}
+                  error={this.state.loginError}
                   InputProps={{
                       endAdornment: (
                       <InputAdornment position="end">
@@ -124,17 +138,18 @@ class Login extends Component {
                   }}
                 />
                 </Grid>
-
+                { loginErrorMessage }
                 <Grid item xs={12}>
                   <Button 
                       variant="contained" 
                       color="primary" 
-                      className={ [classes.button, classes.buttonMargin] }
+                      className={ classNames(classes.button, classes.margin) }
                       onClick={ () => { this.handleLogin(this.props.username, this.state.password) } }
                       >
                       Login
                   </Button>
                 </Grid>
+                
               </Paper>
           </>
         )
