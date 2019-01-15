@@ -1,0 +1,14 @@
+.content {
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: row wrap;
+    align-items: stretch;
+}
+
+.applicationName {
+    flex-grow: 3,
+}
+
+.logoutButton {
+    flex-grow: 1,
+}

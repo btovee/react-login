@@ -26,8 +26,6 @@ class Authentication extends Component {
                 this.props.history.push('/login');
             });
       }
-    
-     
 
     render() {
         return (
