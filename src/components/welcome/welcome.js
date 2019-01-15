@@ -37,9 +37,6 @@ class Welcome extends Component {
                             You have successfully logged in.
                         </Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                        {/* <MetricsComponent /> */}
-                    </Grid>
                 </Grid>
             </Paper>
         </Grid>
