@@ -1,5 +1,4 @@
-import * as actionTypes from './actions';
-import { removeJwt } from '../helpers/jwt-helper';
+import * as actions from './actions';
 
 const initialState = {
     username : '',
@@ -8,23 +7,22 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.SET_USER:
+        case actions.SET_USER:
             return {
                 ...state,
                 username: action.username,
             };
-        case actionTypes.REMOVE_USER:
+        case actions.REMOVE_USER:
             return {
                 ...state,
                 username: null,
             };
-        case actionTypes.LOG_IN:
+        case actions.LOG_IN:
             return {
                 ...state,
                 loggedIn: true,
             };
-        case actionTypes.LOG_OUT:
-            removeJwt();
+        case actions.LOG_OUT:
             return {
                 ...state,
                 username : null,

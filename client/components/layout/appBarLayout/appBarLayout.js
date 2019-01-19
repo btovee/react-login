@@ -9,7 +9,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import * as actionTypes from '../../../store/actions';
+import * as actions from '../../../store/actions';
 import classes from './appBarLayout.module.css'
 import { Grid } from '@material-ui/core';
 
@@ -56,9 +56,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      dispatchLogout: () => dispatch({ type: actionTypes.LOG_OUT }) 
+      dispatchLogout: () => dispatch(actions.onUnauthorisedToken()) 
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(null)(withRouter(AppBarLayout)));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles()(withRouter(AppBarLayout)));

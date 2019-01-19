@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import * as actionTypes from '../../store/actions';
+import * as actions from '../../store/actions';
 import LoginAPI from '../../services/login.api';
 import { getJwt } from '../../helpers/jwt-helper';
 
@@ -46,8 +46,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuthorisedToken: () => dispatch({ type: actionTypes.LOG_IN }),
-        onUnauthorisedToken: () => dispatch({ type: actionTypes.LOG_OUT })
+        onAuthorisedToken: () => dispatch(actions.onAuthorisedToken()),
+        onUnauthorisedToken: () => dispatch(actions.onUnauthorisedToken())
     }
 }
 

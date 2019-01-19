@@ -3,34 +3,12 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import AppBarLayout from './appBarLayout/appBarLayout';
+import classes from './homeLayout.module.css'
 
-
-
-
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  margin: {
-    margin: theme.spacing.unit,
-  },
-  textField: {
-    flexBasis: 200,
-  },
-  buttonMargin: {
-      margin: "3%"
-  },
-  containerMargin : {
-      margin : "2%"
-  }
-
-});
 
 class HomeLayout extends Component {
  
   render() {
-    const { classes } = this.props;
 
     return (
         <>
@@ -53,4 +31,4 @@ HomeLayout.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(HomeLayout);
+export default withStyles()(HomeLayout);

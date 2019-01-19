@@ -16,18 +16,11 @@ import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LoginAPI from '../../services/login.api';
 import { setJwt } from '../../helpers/jwt-helper';
-import * as actionTypes from '../../store/actions';
+import * as actions from '../../store/actions';
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
   margin: {
     margin: theme.spacing.unit,
-  },
-  textField: {
-    flexBasis: 200,
   }
 });
 
@@ -89,18 +82,16 @@ class Login extends Component {
   }
  
   render() {
-    const { classes } = this.props;
-
 
     let loginPartial = null;
     let loginErrorMessage = null;
 
     if(this.state.loginError) {
-      loginErrorMessage = ( <Grid item xs={12} className={classes.margin}> {this.state.loginErrorMessage}  </Grid> )
+      loginErrorMessage = ( <Grid item xs={12} className={this.props.classes.margin}> {this.state.loginErrorMessage}  </Grid> )
     }
 
     if(this.props.loading){
-        loginPartial = <CircularProgress className={classes.progress} />
+        loginPartial = <CircularProgress className={this.props.classes.progress} />
     } else {
         loginPartial = (
           <>      
@@ -108,7 +99,7 @@ class Login extends Component {
                 <Grid item xs={12}>
                 <TextField
                   id="outlined-adornment-weight"
-                  className={classNames(classes.margin, classes.textField)}
+                  className={classNames(this.props.classes.margin, this.props.classes.textField)}
                   variant="outlined"
                   label="Username"
                   value={this.props.username}
@@ -117,7 +108,7 @@ class Login extends Component {
                   />
                 <TextField
                   id="outlined-adornment-password"
-                  className={classNames(classes.margin, classes.textField)}
+                  className={classNames(this.props.classes.margin, this.props.classes.textField)}
                   variant="outlined"
                   type={this.state.showPassword ? 'text' : 'password'}
                   label="Password"
@@ -143,7 +134,7 @@ class Login extends Component {
                   <Button 
                       variant="contained" 
                       color="primary" 
-                      className={ classNames(classes.button, classes.margin) }
+                      className={ classNames(this.props.classes.button, this.props.classes.margin) }
                       onClick={ () => { this.handleLogin(this.props.username, this.state.password) } }
                       >
                       Login
@@ -175,9 +166,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      handleUsernameChange: (event) => dispatch({ type: actionTypes.SET_USER, username: event.target.value }),
-      onAuthorisedToken: () => dispatch({ type: actionTypes.LOG_IN }),
-      onUnauthorisedToken: () => dispatch({ type: actionTypes.LOG_OUT })
+      handleUsernameChange: (event) => dispatch(actions.handleUsernameChange(event.target.value)),
+      onAuthorisedToken: () => dispatch(actions.onAuthorisedToken()),
+      onUnauthorisedToken: () => dispatch(actions.onUnauthorisedToken())
   }
 }
 
